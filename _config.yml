@@ -15,11 +15,11 @@ remote_theme             : mmistakes/minimal-mistakes
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "en-US"
-title                    : "Site Title"
+locale                   : "ko_KR"
+title                    : "개발개발개발"
 title_separator          : "-"
-name                     : "Your Name"
-description              : "An amazing website."
+name                     : "좌승의"
+description              : "블로그 하나 둘"
 url                      : "https://bongdong2.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
