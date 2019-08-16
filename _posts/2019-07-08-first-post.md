@@ -1,5 +1,5 @@
 ---
-title: "Jekyll를 이용한 첫 번째 포스트"
+title: "Hello World"
 date: 2019-07-08 16:23:28 -0400
 categories: jekyll update
 ---
