@@ -16,10 +16,10 @@ minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt"
 
 # Site Settings
 locale                   : "ko_KR"
-title                    : "블로그으"
+title                    : "블로그"
 title_separator          : "-"
 name                     : "Your Name"
-description              : "I am an amazing person."
+description              : "dev blog"
 url                      : "https://bongdong2.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -108,7 +108,7 @@ analytics:
 author:
   name             : "seungui"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "아이 엠 언 어메이징 퍼슨"
+  bio              : "nope"
   location         : "jeju"
   email            :
   links:
