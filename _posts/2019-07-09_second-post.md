@@ -1,5 +1,5 @@
 ---
-title: "두 번째 테스트 포스트"
+title: "Hello Second"
 date: 2019-07-08 09:27:28 -0400
 categories: jekyll update
 ---
