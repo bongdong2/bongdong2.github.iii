@@ -131,6 +131,7 @@ class EventController{
 - /scripts.md 참고
 
 1. PostgreSQL 드라이버 의존성 추가
+
 ```xml
 <dependency>
 	<groupId>org.postgresql</groupId>
