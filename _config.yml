@@ -11,16 +11,16 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 # theme                  : "minimal-mistakes-jekyll"
-remote_theme             : mmistakes/minimal-mistakes
+# remote_theme           : "mmistakes/minimal-mistakes"
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "ko_KR"
-title                    : "블로그"
+locale                   : "ko-KR"
+title                    : "dev log"
 title_separator          : "-"
-name                     : "Your Name"
-description              : "dev blog"
-url                      : "https://bongdong2.github.io"
+name                     : "Seungui Jwa"
+description              : "dev study"
+url                      : "https://bongdong2.github.io" # the base hostname & protocol for your site e.g. 
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -29,7 +29,7 @@ masthead_title           : # overrides the website title displayed in the masthe
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
+  provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2", "utterances", "custom"
   disqus:
     shortname            : # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -106,11 +106,11 @@ analytics:
 
 # Site Author
 author:
-  name             : "seungui"
+  name             : "Seungui Jwa"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "nope"
-  location         : "jeju"
-  email            :
+  #bio              : "Software developer<br>[Java/Spring/SpringBoot]<br>[JavaScript/TypeScript/Angular/Vue]<br>[Native Android APP]<br>[Mysql/PostgreSql]<br>[Docker/Nginx]"
+  location         : "Jeju-do, Korea"
+  email            : jsu373712@naver.com
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -293,3 +293,5 @@ defaults:
       comments: # true
       share: true
       related: true
+      
+remote_theme : mmistakes/minimal-mistakes
