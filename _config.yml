@@ -11,17 +11,18 @@
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
 # theme                  : "minimal-mistakes-jekyll"
-# remote_theme           : "mmistakes/minimal-mistakes"
+#remote_theme           : "mmistakes/minimal-mistakes"
 minimal_mistakes_skin    : "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : "dev log"
+title                    : "Bongdong2's Blog"
 title_separator          : "-"
+subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Seungui Jwa"
 description              : "dev study"
-url                      : "https://bongdong2.github.io" # the base hostname & protocol for your site e.g. 
-baseurl                  : "" # the subpath of your site, e.g. "/blog"
+url                      : "https://bongdong2.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+baseurl                  : ""  # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
@@ -29,7 +30,7 @@ masthead_title           : # overrides the website title displayed in the masthe
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
 comments:
-  provider               : # false (default), "disqus", "discourse", "facebook", "google-plus", "staticman", "staticman_v2", "utterances", "custom"
+  provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
   disqus:
     shortname            : # https://help.disqus.com/customer/portal/articles/466208-what-s-a-shortname-
   discourse:
@@ -108,9 +109,9 @@ analytics:
 author:
   name             : "Seungui Jwa"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  #bio              : "Software developer<br>[Java/Spring/SpringBoot]<br>[JavaScript/TypeScript/Angular/Vue]<br>[Native Android APP]<br>[Mysql/PostgreSql]<br>[Docker/Nginx]"
-  location         : "Jeju-do, Korea"
-  email            : jsu373712@naver.com
+  bio              : "Springframework"
+  location         : "Jeju, Republic of Korea"
+  email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
@@ -214,7 +215,7 @@ kramdown:
 # Sass/SCSS
 sass:
   sass_dir: _sass
-  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
+  style: compressed # https://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
 
 
 # Outputting
@@ -230,7 +231,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
-  - jemoji
   - jekyll-include-cache
 
 # mimic GitHub Pages with --safe
@@ -239,7 +239,6 @@ whitelist:
   - jekyll-sitemap
   - jekyll-gist
   - jekyll-feed
-  - jemoji
   - jekyll-include-cache
 
 
@@ -251,8 +250,8 @@ whitelist:
 #  - Archive page should exist at path when using Liquid method or you can
 #    expect broken links (especially with breadcrumbs enabled)
 #  - <base_path>/tags/my-awesome-tag/index.html ~> path: /tags/
-#  - <base_path/categories/my-awesome-category/index.html ~> path: /categories/
-#  - <base_path/my-awesome-category/index.html ~> path: /
+#  - <base_path>/categories/my-awesome-category/index.html ~> path: /categories/
+#  - <base_path>/my-awesome-category/index.html ~> path: /
 category_archive:
   type: liquid
   path: /categories/
@@ -273,7 +272,7 @@ tag_archive:
 
 
 # HTML Compression
-# - http://jch.penibelst.de/
+# - https://jch.penibelst.de/
 compress_html:
   clippings: all
   ignore:
@@ -293,5 +292,3 @@ defaults:
       comments: # true
       share: true
       related: true
-      
-remote_theme : mmistakes/minimal-mistakes
