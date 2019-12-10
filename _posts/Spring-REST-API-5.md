@@ -58,11 +58,11 @@ Account manager;
 - @Test(expected)
   - 예외 타입만 확인 가능
 ```
-    @Test(expected = UsernameNotFoundException.class)
-    public void findByUsernameFail() {
-        String username = "random@email.com";
-        accountService.loadUserByUsername(username);
-    }
+@Test(expected = UsernameNotFoundException.class)
+public void findByUsernameFail() {
+    String username = "random@email.com";
+    accountService.loadUserByUsername(username);
+}
 ```
 
 
@@ -70,31 +70,31 @@ Account manager;
   - 예외 타입과 메시지 확인 가능.
   - 하지만 코드가 다소 복잡.
 ```
-    @Test
-    public void findByUsernameFail() {
-        String username = "random@email.com";
-        try{
-            accountService.loadUserByUsername(username);
-            fail("supposed to be failed");
-        } catch (UsernameNotFoundException e) {
-            assertThat(e.getMessage().contains(username));
-        }
+@Test
+public void findByUsernameFail() {
+    String username = "random@email.com";
+    try{
+        accountService.loadUserByUsername(username);
+        fail("supposed to be failed");
+    } catch (UsernameNotFoundException e) {
+        assertThat(e.getMessage().contains(username));
     }
+}
 ```
 
 - @Rule ExpectedException
   - 코드는 간결하면서 예외 타입과 메시지 모두 확인 가능
 ```
-    @Test
-    public void findByUsernameFail() {
-        // Expected
-        String username = "random@email.com";
-        expectedException.expect(UsernameNotFoundException.class);
-        expectedException.expectMessage(Matchers.containsString(username));
+@Test
+public void findByUsernameFail() {
+    // Expected
+    String username = "random@email.com";
+    expectedException.expect(UsernameNotFoundException.class);
+    expectedException.expectMessage(Matchers.containsString(username));
 
-        // When
-        accountService.loadUserByUsername(username);
-    }
+    // When
+    accountService.loadUserByUsername(username);
+}
 ```
 
 
@@ -120,47 +120,47 @@ Account manager;
 
 - 스프링 시큐리티 설정
   ```java
-        @Configuration
-        @EnableWebSecurity
-        public class SecurityConfig extends WebSecurityConfigurerAdapter {
-        
-            @Autowired
-            AccountService accountService;
-        
-            @Autowired
-            PasswordEncoder passwordEncoder;
-        
-            @Bean
-            public TokenStore tokenStore() {
-                return new InMemoryTokenStore();
-            }
-        
-            @Bean
-            @Override
-            public AuthenticationManager authenticationManagerBean() throws Exception {
-                return super.authenticationManagerBean();
-            }
-        
-            @Override
-            protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-                auth.userDetailsService(accountService)
-                        .passwordEncoder(passwordEncoder);
-            }
-        
-            @Override
-            public void configure(WebSecurity web) throws Exception {
-                web.ignoring().mvcMatchers("/docs/index.html");
-                web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-            }
-        
-            // 아래 방법 보다 위의 방법이 더 낫다.
-            /*@Override
-            protected void configure(HttpSecurity http) throws Exception {
-                http.authorizeRequests()
-                        .mvcMatchers("/docs/index.html").anonymous()
-                        .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).anonymous();
-            }*/
+    @Configuration
+    @EnableWebSecurity
+    public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    
+        @Autowired
+        AccountService accountService;
+    
+        @Autowired
+        PasswordEncoder passwordEncoder;
+    
+        @Bean
+        public TokenStore tokenStore() {
+            return new InMemoryTokenStore();
         }
+    
+        @Bean
+        @Override
+        public AuthenticationManager authenticationManagerBean() throws Exception {
+            return super.authenticationManagerBean();
+        }
+    
+        @Override
+        protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+            auth.userDetailsService(accountService)
+                    .passwordEncoder(passwordEncoder);
+        }
+    
+        @Override
+        public void configure(WebSecurity web) throws Exception {
+            web.ignoring().mvcMatchers("/docs/index.html");
+            web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+        }
+    
+        // 아래 방법 보다 위의 방법이 더 낫다.
+        /*@Override
+        protected void configure(HttpSecurity http) throws Exception {
+            http.authorizeRequests()
+                    .mvcMatchers("/docs/index.html").anonymous()
+                    .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).anonymous();
+        }*/
+    }
     ```
   - @EnableWebSecurity : 스프링부트의 기본설정을 무효화하고 개발자가 만든 설정을 사용한다.
   - @EnableGlobalMethodSecurity
