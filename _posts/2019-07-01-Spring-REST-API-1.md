@@ -1,7 +1,7 @@
 ---
 title: "Spring기반 REST API - 1"
 date: 2019-03-01 14:23:28 -0400
-categories: spring
+categories: java
 ---
 
 ch1. REST API 및 프로젝트 소개

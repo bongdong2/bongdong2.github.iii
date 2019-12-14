@@ -1,7 +1,7 @@
 ---
 title: "Spring기반 REST API - 2"
 date: 2019-11-11 14:23:28 -0400
-categories: categories: spring
+categories: java
 
 ---
 
