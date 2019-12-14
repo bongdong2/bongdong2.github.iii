@@ -1,7 +1,8 @@
 ---
 title: "Spring기반 REST API - 2"
 date: 2019-11-11 14:23:28 -0400
-categories: java
+categories: categories: spring
+
 ---
 
 ch2. Event 생성 API 만들기

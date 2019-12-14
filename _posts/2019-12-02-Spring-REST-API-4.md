@@ -1,7 +1,8 @@
 ---
 title: "Spring기반 REST API - 4"
 date: 2019-12-01 09:23:30 -0400
-categories: java
+categories: categories: spring
+
 ---
 
 ch4. 이벤트 조회 및 수정 REST API 개발
