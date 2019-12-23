@@ -30,13 +30,13 @@ Intellij Ultimate로 생성하거나 [Initializr](https://start.spring.io/)사�
 메인 애플리케이션 위치 (psvm이 있는 class)
  - 기본 패키지 (component scan을 여기서부터 하기 때문)
 
- ## 2. 스프링 부트 원리
+## 2. 스프링 부트 원리
 
- ### 2.1 의존성 관리 이해
- [document](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-dependency-management) <br>
+### 2.1 의존성 관리 이해
+[document](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using-boot-dependency-management) <br>
 
- pom.xml > spring-boot-starter-parent > spring-boot-dependencies <br>
- 하나씩 타고 올라가 보면 의존성들이 다 정의되어 있다.
+pom.xml > spring-boot-starter-parent > spring-boot-dependencies <br>
+하나씩 타고 올라가 보면 의존성들이 다 정의되어 있다.
 
 우리가 직접 관리해야 할 의존성들이 줄어 들어 관리하기 편하다.
 
@@ -53,17 +53,17 @@ Intellij Ultimate로 생성하거나 [Initializr](https://start.spring.io/)사�
 ### 2.2 자동 설정 이해
 ```java
 @SpringBootApplication
-public class DemospringbootApplication {
+public class Application {
 
-	public static void main(String[] args) {
-		SpringApplication.run(DemospringbootApplication.class, args);
+public static void main(String[] args) {
+  SpringApplication.run(DemospringbootApplication.class, args);
 
-    // 위의 코드와 같다.
-		SpringApplication application = new SpringApplication(DemospringbootApplication.class);
-    // 웹으로 실행하고 싶지 않은 경우
-    //application.setWebApplicationType(WebApplicationType.NONE);
-		application.run(args);
-	}
+  // 위의 코드와 같다.
+  SpringApplication application = new SpringApplication(Application.class);
+  // 웹으로 실행하고 싶지 않은 경우
+  //application.setWebApplicationType(WebApplicationType.NONE);
+  application.run(args);
+}
 
 }
 ```
@@ -97,7 +97,7 @@ public class DemospringbootApplication {
 ## 3. 스프링 부트 활용
 
 ### 3.1 SpringApplication - 1
-https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-spring-application.html#boot-features-spring-application
+[https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-spring-application.html#boot-features-spring-application](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-spring-application.html#boot-features-spring-application)
 
 ```java
 SpringApplication.run()... 
@@ -105,9 +105,9 @@ SpringApplication.run()...
 ```
 ```java
 @SpringBootApplication
-public class DemospringbootApplication {
+public class Application {
 	public static void main(String[] args) {
-		SpringApplication app = new SpringApplication(DemospringbootApplication.class);
+		SpringApplication app = new SpringApplication(Application.class);
 		app.run(args);
 	}
 }
@@ -121,7 +121,7 @@ public class DemospringbootApplication {
 - FailureAnalyzer : 에러 발생 시, 에러 메시지를 예쁘게 출력해준다. 
 
 - 배너
-  - banner.txt | gif | jpg | png
+  - banner.txt / gif / jpg / png
   - 애플리케이션 실행시 에디터에서 보여지는 이미지 등.. 변경하고 싶으면 src/resources에 banner.txt 파일을 생성하고 배너텍스트를 입력하면 애플리케이션 실행시 커스텀배너가 사용된다. 원한다면 아스키 제너레이터를 사용해서 예쁘게 꾸밀 수 있다.
   - ${spring-boot.version} 등의 변수를 사용할 수 있다.
   - 배너 위치는 resources에 넣거나 다른 곳에 위치시키면 application.properties에 경로를 지정한다. spring.banner.location=../.../
@@ -139,3 +139,89 @@ public static void main(String[] args) {
 
 
 ### 3.2 SpringApplication - 2 
+- ApplicationStartingEvent 
+  - ApplicationEvent 등록
+  - ApplicationContext를 만들기 전에 사용하는 리스너는 @Bean으로 등록할 수 없다.
+    - SpringApplication.addListeners()
+
+```java
+public class SimpleListener implements ApplicationListener<ApplicationStartingEvent> {
+
+    @Override
+    public void onApplicationEvent(ApplicationStartingEvent applicationStartingEvent) {
+        System.out.println("=======================");
+        System.out.println("Application is starting");
+        System.out.println("=======================");
+    }
+}
+
+@SpringBootApplication
+public class Application {
+
+	public static void main(String[] args) {
+		//SpringApplication.run(Application.class, args);
+		SpringApplication app = new SpringApplication(Application.class);
+		app.addListeners(new SimpleListener());
+		app.run(args);
+	}
+
+}
+```
+애플리케이션 구동 전에 sout 메시지 찍힘.
+
+- ApplicationStartedEvent
+```java
+@Component
+public class SimpleListener implements ApplicationListener<ApplicationStartedEvent> {
+
+    @Override
+    public void onApplicationEvent(ApplicationStartedEvent applicationStartedEvent) {
+        System.out.println("=======================");
+        System.out.println("Application is starting");
+        System.out.println("=======================");
+    }
+}
+```
+애플리케이션이 모두 구동된 두에 sout 메시지가 나온다.
+
+- WebApplicationType 설정하기
+```java
+SpringApplication app = new SpringApplication(Application.class);
+app.setWebApplicationType(WebApplicationType.NONE);
+// WebApplicationType : NONE, SERVLET, REACTIVE
+// servlet이 있기 때문에 webflux가 있어도 default는 servlet이다.
+```
+
+- 애플리케이션 아규먼트 사용하기
+  - VM Options : -Dfoo, Program argument : --bar로 설정
+  - SimpleClass작성
+  - ```java
+    @Component
+    public class SimpleClass {
+
+        public SimpleClass(ApplicationArguments arguments) {
+            System.out.println("foo: " + arguments.containsOption("foo"));
+            System.out.println("bar: " + arguments.containsOption("bar"));
+        }
+    }
+    // foo : false
+    // bar : true
+    ```
+  - java -jar target/demospringboot-0.0.1-SNAPSHOT.jar -Dfoo --bar 와 동일  
+  - VM option은 아규먼트가 아니고 '--'로 주는 애들이 애플리케이션 아규먼트
+  - ApplicationArguments를 빈으로 등록해 주니까 가져다 쓰면 됨.
+- 애플리케이션 실행한 뒤 뭔가 실행하고 싶을 때
+  - ApplicationRunner (추천) 
+    - ```java
+      @Component
+      public class SimpleClass implements ApplicationRunner {
+
+          @Override
+          public void run(ApplicationArguments args) throws Exception {
+              System.out.println("foo: " + args.containsOption("foo"));
+              System.out.println("bar: " + args.containsOption("bar"));
+          }
+      }
+      ```
+  - 또는 CommandLineRunner
+  - 순서 지정 가능 @Order
