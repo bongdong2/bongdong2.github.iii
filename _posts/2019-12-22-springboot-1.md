@@ -226,4 +226,4 @@ app.setWebApplicationType(WebApplicationType.NONE);
   - 또는 CommandLineRunner
   - 순서 지정 가능 @Order
 
-  asdf
+  
