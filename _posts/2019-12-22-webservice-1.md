@@ -10,7 +10,8 @@ Spring Data JPA 적용하기
 [1. Spring Data JPA 적용하기](#1-Spring-Data-JPA-적용하기)<br>
 
 ## 1. Spring Data JPA 적용하기
-무엇이고 사용이유 주절주절
+mybatis 같은 매퍼 대신 JPA를 쓰는 이유? 객체지향 프로그래밍 언어인 JAVA와 SQL간의 패러다임 불일치 문제 때문.
+개발자는 SQL매퍼가 아니다. SQL문 보다 비즈니스 로직에 집중할 수 있다.
 
 ### 1.1 dependency 추가
 ```source
