@@ -46,7 +46,7 @@ Travis CI는 깃헙에서 제공하는 무료 CI 서비스다. 젠킨스는 설�
     - Travis CI의 상세한 설정은 프로젝트의 .travis.yml 파일로 할 수 있다.
         - YAML(야믈)은 쉽게 말해 JSON에서 괄호를 제거한 것이다. 기계에서 파싱하기 쉽게, 사람이 다루기 쉽게.
     - 프로젝트의 build.gradle과 같은 위치에 .travis.yml을 생성한다.
-        ```YML
+        ```properties
         language: java
         jdk:
         - openjdk8
