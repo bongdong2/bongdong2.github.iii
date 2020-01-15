@@ -1,10 +1,10 @@
 ---
-title: "springboot & AWS - 머스테치, 구글로그인"
+title: "springboot & AWS - mustache, social login"
 date: 2019-12-26 13:58:00 -0400
 categories: spring
 ---
 
-머스테치로 화면 구성 & 구글 로그인 구현
+머스테치로 화면 구성 & 소셜 로그인 구현
 
 ### 목차
 [1. 머스테치로 화면 구성](#1-머스테치로-화면-구성)<br>
