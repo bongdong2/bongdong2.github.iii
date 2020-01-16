@@ -121,3 +121,61 @@ public class HelloResponseDtoTest {
 - 여기서 JUnit의 assertThat가 아닌 assertj의 assertThat을 사용한 이유
     - JUnit의 assertThat를 사용하면 CoreMatchers 라이브러리가 필요하다.
     - 자동완성이 좀 더 잘 된다.
+
+```java
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class PostsRepositoryTest {
+
+    @Autowired
+    PostsRepository postsRepository;
+
+    @After
+    public void cleanup() {
+        postsRepository.deleteAll();
+    }
+
+    @Test
+    public void 게시글저장_불러오기() {
+        // given
+        String title = "테스트 게시글";
+        String content = "테스트 본문";
+
+        postsRepository.save(Posts.builder()
+                .title(title)
+                .content(content)
+                .author("jsu373712@naver.com")
+                .build());
+
+        // when
+        List<Posts> postsList = postsRepository.findAll();
+
+        // then
+        Posts posts = postsList.get(0);
+        assertThat(posts.getTitle()).isEqualTo(title);
+        assertThat(posts.getContent()).isEqualTo(content);
+    }
+
+    @Test
+    public void BaseTimeEntity_등록() {
+        // given
+        LocalDateTime now = LocalDateTime.of(2019,12,30,12,17,0);
+        postsRepository.save(Posts.builder()
+                    .title("title")
+                    .content("content")
+                    .author("author")
+                    .build());
+
+        // when
+        List<Posts> postsList = postsRepository.findAll();
+
+        // then
+        Posts posts = postsList.get(0);
+
+        System.out.println(">>>>>>> createDate = " + posts.getCreatedDate() + ", modifiedDate = " + posts.getModifiedDate());
+
+        assertThat(posts.getCreatedDate()).isAfter(now);
+        assertThat(posts.getModifiedDate()).isAfter(now);
+    }
+}
+```
