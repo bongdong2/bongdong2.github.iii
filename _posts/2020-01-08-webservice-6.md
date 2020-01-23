@@ -12,6 +12,8 @@ categories: spring
 [1.2 Travis CI 연동하기](#12-travis-ci-연동하기)<br>
 [1.3 Travis CI와 AWS S3 연동하기](#13-travis-ci와-aws-s3-연동하기)<br>
 [1.4 Travis CI와 AWS S3 CodeDeploy 연동하기](#14-travis-ci와-aws-s3-codedeploy-연동하기)<br>
+[1.5 배포 자동화 구성](#15-배포-자동화-구성)<br>
+[1.6 CodeDeploy 로그 확인](#16-codedeploy-로그-확인)<br>
 
 ## 1. Travis CI 배포 자동화
 여러 개발자의 코드가 실시간으로 병합되고, 테스트가 수행되는 환경, master 브랜치가 푸시되면 배포가 자동으로 이루어지는 환경을 구축하지 않으면 실수할 여지가 너무나 많다. 지속 가능한 통합 환경을 구축하고 배포해야 한다.
@@ -139,9 +141,6 @@ CodeDeploy가 빌드도 하고 배포도 할 수 있으나 빌드 없이 배포�
         - 앞에서 생성한 deploy 디렉토리를 지정한다.
         - 해당 위치의 파일들만 S3로 전송한다.
 
-- % S3 ACCESS_KEY를 다시 발급 받고 버킷을 다시 생성하여 오류를 수정했다.
-
-
 ### 1.4 Travis CI와 AWS S3 CodeDeploy 연동하기
 
 - EC2에 IAM 역할 추가하기
@@ -201,33 +200,138 @@ CodeDeploy가 빌드도 하고 배포도 할 수 있으나 빌드 없이 배포�
         - mkdir ~/app/step2 && mkdir ~/app/step2/zip
     - Travis CI의 Build가 끝나면 S3에 zip파일이 전송되고, 이 zip파일은 /home/ec2-user/app/step2/zip으로 복사되어 압축을 풀 예정이다.
     - Travis CI의 설정은 .travis.yml로 진행하고, AWS CodeDeploy의 설정은 appspec.yml로 진행한다.
-    ```properties
-    version: 0.0
-    os: linux
-    files:
-        - source:  /
-          destination: /home/ec2-user/app/step2/zip/
-          overwrite: yes
-    ```
-    - version: 0.0
-        - CodeDeploy 버전. 프로젝트 버전 아니므로 0.0 외에 다른 버전 사용시 오류 발생
-    - source
-        - CodeDeploy에서 전달해 준 파일 중 destination으로 이동시킬 대상을 지정한다.
-        - 루트경로(/)를 지정하면 전체 파일을 이야기한다.
-    - destination
-        - source에서 지정된 파일을 받은 위치.
-        - 이후 Jar를 실행하는 등은 destination에서 옮긴 파일들로 진행된다.
-    ```properties
-    - deploy :
-        ...
-        - provider: codedeploy 
-        access_key_id: $AWS_ACCESS_KEY # Travis repo setting에 설정된 값
-        secret_access_key: $AWS_SECRET_KEY # Travis repo setting에 설정된 값
-        bucket: seungui-webservice-build # s3 버킷
-        key: seungui-springboot-webservice.zip # 빌드 파일을 압축해서 전달
-        bundle_type : zip
-        application : seungui-springboot-webservice # 웹 콘솔에서 등록한 CodeDeploy 애플리케이션
-        deployment_group: seungui-deployment-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
-        region: ap-northeast-2
-        wait-until-deployed: true
-    ```
+```properties
+version: 0.0
+os: linux
+files:
+    - source:  /
+        destination: /home/ec2-user/app/step2/zip/
+        overwrite: yes
+```
+- version: 0.0
+    - CodeDeploy 버전. 프로젝트 버전 아니므로 0.0 외에 다른 버전 사용시 오류 발생
+- source
+    - CodeDeploy에서 전달해 준 파일 중 destination으로 이동시킬 대상을 지정한다.
+    - 루트경로(/)를 지정하면 전체 파일을 이야기한다.
+- destination
+    - source에서 지정된 파일을 받은 위치.
+    - 이후 Jar를 실행하는 등은 destination에서 옮긴 파일들로 진행된다.
+```properties
+- deploy :
+    ...
+    - provider: codedeploy 
+    access_key_id: $AWS_ACCESS_KEY 
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: webservice-build
+    key: springboot-webservice.zip
+    bundle_type : zip
+    application : springboot-webservice
+    deployment_group: deployment-group
+    region: ap-northeast-2
+    wait-until-deployed: true
+```
+
+### 1.5 배포 자동화 구성
+
+- deploy.sh 파일 추가
+    - 스프링부트 프로젝트 최상위에 scripts 디렉토리를 만들고 deploy.sh 파일을 생성한다.
+
+```bash
+#!/bin/bash
+
+REPOSITORY=/home/ec2-user/app/step2
+PROJECT_NAME=projcet name
+
+echo "> Build 파일 복사"
+
+cp $REPOSITORY/zip/*.jar $REPOSITORY/
+
+echo "> 현재 구동중인 애플리케이션 pid 확인"
+
+CURRENT_PID=$(pgrep -fl $PROJECT_NAME* | grep jar | awk '{print $1}')
+
+echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID"
+
+if [ -z "$CURRENT_PID" ]; then
+    echo "> 현재 구동중인 애플리케이션이 없으므로 종료하지 않습니다."
+else
+    echo "> kill -15 $CURRENT_PID"
+    kill -15 $CURRENT_PID
+    sleep 5
+fi
+
+echo "> 새 어플리케이션 배포"
+
+JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
+
+echo "> JAR Name: $JAR_NAME"
+
+echo "> $JAR_NAME 에 실행권한 추가"
+
+chmod +x $JAR_NAME
+
+echo "> $JAR_NAME 실행"
+
+nohup java -jar \
+    -Dspring.config.location=classpath:/application.properties,classpath:/application-real.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties \
+    -Dspring.profiles.active=real \
+    $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
+```
+- chmod +x $JAR_NAME
+    - Jar 파일은 실행 권한이 없는 상태. nohup으로 실행할 수 있게 실행 권한을 부여한다.
+- JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
+    - nohup 실행 시 CodeDeploy는 무한 대기한다.
+    - 이 이슈를 해결하기 위해 nohup.out 파일을 표준 입출력용으로 별도로 사용한다.
+    - 이렇게 하지 않으면 nohup.out 파일이 생기지 않고, CodeDeploy 로그에 표준 입출력이 출력된다.
+    - nohup이 끝나기 전까지 CodeDeploy도 끝나지 않으니 꼭 이렇게 해야만 한다.
+
+- .travis.yml 파일 수정
+    - 현재는 프로젝트의 모든 파일을 zip 파일로 만드는데, 실제로 필요한 파일들은 Jar, appspec.yml, 배포를 위한 스크립트들이다.
+    - .travis.yml 파일의 before_deploy를 수정한다.
+
+```properties
+before_deploy:
+  - mkdir -p before-deploy # zip에 포함시킬 파일들을 담을 디렉토리 생성
+  - cp scripts/*.sh before-deploy/
+  - cp appspec.yml before-deploy/
+  - cp build/libs/*.jar before-deploy/
+  - cd before-deploy && zip -r before-deploy * # before-deploy로 이동후 전체 압축
+  - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동후 deploy 디렉토리 생성
+  - mv before-deploy/before-deploy.zip deploy/seungui-springboot-webservice.zip # deploy로 zip파일 이동
+```
+
+    - Travis CI는 S3로 특정 파일만 업로드가 안 된다.
+        - 디렉토리 단위로만 업로드 할 수 있기 떄문에 deploy 디렉토리는 항상 생성한다.
+    - before-deploy에는 zip 파일에 포함시킬 파일들을 저장한다.
+    - zip -r 명령어를 통해 before-deploy 디렉토리 전체 파일을 압축한다.
+
+- appspec.yml 파일 수정
+```properties
+version: 0.0
+os: linux
+files:
+  - source:  /
+    destination: /home/ec2-user/app/step2/zip/
+    overwrite: yes
+
+permissions:
+  - object: /
+    pattern: "**"
+    owner: ec2-user
+    group: ec2-user
+
+hooks:
+  ApplicationStart:
+    - location: deploy.sh
+      timeout: 60
+      runas: ec2-user
+```
+
+- 실제 배포 과정 체험
+    - build.gradle 에서 프로젝트 버전을 변경한다.
+        - version '0.0.2-SNAPSHOT'
+    - 변경된 내용을 확인 할 수 있게 index.mustach 내용을 수정한다.
+    
+
+### 1.6 CodeDeploy 로그 확인
+- CodeDeploy 로그는 /opt/codedeploy-agent/deployment-root/deployment.logs 파일에 있다.
