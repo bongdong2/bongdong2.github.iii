@@ -306,6 +306,7 @@ before_deploy:
     - zip -r 명령어를 통해 before-deploy 디렉토리 전체 파일을 압축한다.
 
 - appspec.yml 파일 수정
+
 ```properties
 version: 0.0
 os: linux
@@ -330,7 +331,7 @@ hooks:
 - 실제 배포 과정 체험
     - build.gradle 에서 프로젝트 버전을 변경한다.
         - version '0.0.2-SNAPSHOT'
-    - 변경된 내용을 확인 할 수 있게 index.mustach 내용을 수정한다.
+    - 변경된 내용을 확인 할 수 있게 index.mustache 내용을 수정한다.
     
 
 ### 1.6 CodeDeploy 로그 확인
