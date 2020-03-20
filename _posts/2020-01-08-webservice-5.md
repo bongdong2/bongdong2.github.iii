@@ -39,7 +39,7 @@ EC2 서버에 프로젝트를 배포해 보자
     - git pull
 만약 gradlew 실행 권한이 없다는 메시지가 뜨면
     - chmod +x ./gradlew
-- EC2에 gradle을 설치하지 않았는데 gradle task를 수행할 수 있는 이유는 프로젝트 내부에 포함된 gradlew 파일 떄문이다. 해당 프로젝트에 한해서 gradle을 쓸 수 있도록 지원하는 wrapper 파일이다.
+- EC2에 gradle을 설치하지 않았는데 gradle task를 수행할 수 있는 이유는 프로젝트 내부에 포함된 gradlew 파일 때문이다. 해당 프로젝트에 한해서 gradle을 쓸 수 있도록 지원하는 wrapper 파일이다.
 
 ### 1.2 배포 스크립트 만들기
 배포는 작성한 코드를 실제 서버에 반영하는 것을 말한다. 여기서는
@@ -47,7 +47,7 @@ EC2 서버에 프로젝트를 배포해 보자
     - Gradle이나 Maven을 통해 프로젝트 테스트와 빌드
     - EC2 서버에서 해당 프로젝트 실행 및 재실행
 
-배포할 떄마다 개발자가 하나하나 명령어를 실행하는 것은 불편하므로 이를 쉘 스크립트로 작성해 스크립트만 실행하면 앞의 작업이 차례로 진행되도록 하겠다.
+배포할 때마다 개발자가 하나하나 명령어를 실행하는 것은 불편하므로 이를 쉘 스크립트로 작성해 스크립트만 실행하면 앞의 작업이 차례로 진행되도록 하겠다.
 
 쉘 스크립트와 vim은 서로 다른 역할을 한다. 쉘 스크립트는 .sh라는 파일 확장자를 가진 파일이다. 쉘 스크립트 역시 리눅스에서 기본적으로 사용할 수 있는 스크립트파일의 한 종류이다.
 
@@ -129,7 +129,7 @@ nohup java -jar $REPOSITORY/$JAR_NAME 2>&1 &
 
 
 ### 1.3 외부 Security 파일 등록하기
-위의 쉘 스크립트 애플리케이션을 실행하면 실패한다. ClientRegistrationRepository를 생성하려면 clientId와 clientSecret이 필요하기 떄문이다. application-oauth.properties가 .gitignore로 제외 되었기 때문이다.
+위의 쉘 스크립트 애플리케이션을 실행하면 실패한다. ClientRegistrationRepository를 생성하려면 clientId와 clientSecret이 필요하기 때문이다. application-oauth.properties가 .gitignore로 제외 되었기 때문이다.
 
 app 디렉토리에 properties 파일을 생성하고 로컬 application-oauth.properties의 내용을 복사한다.
 
@@ -200,7 +200,7 @@ curl 명령이를 통해 EC2 서비스가 잘 배포된 것은 확인했다.
     - 사용자지정  TCP  8080  0.0.0.0/0, ::/0
 - AWS EC2 도메인으로 접속
     - 인스턴스의 상세정보에서 퍼블릭 DNS를 확인할 수 있다. 이 주소가 EC2에 자동으로 할당된 도메인이고 이 주소를 입력해 EC2 서버에 접근할 수 있다. 뒤에 8080포트를 붙이면 접속에 성공한다.
-    - 구글, 네이버 로그인이 되지 않는데 해당 서비스에 EC2의 도메인을 입력하지 않았기 떄문이다.
+    - 구글, 네이버 로그인이 되지 않는데 해당 서비스에 EC2의 도메인을 입력하지 않았기 때문이다.
 - 구글에 EC2 주소 등록
     - 구글 웹 콘솔 > API 및 서비스 > OAuth 동의화면 > 앱 수정 > 승인된 도메인에 AWS EC2 퍼블릭 도메인 입력 후 저장
     - 구글 웹 콘솔 > 사용자 인증 정보 > 애플리케이션 선택 > 승인된 리다이렉션 URL에 AWS EC2 퍼블릭 도메인:8080:login/oauth2/code/google 입력

@@ -98,7 +98,7 @@ public interface PostsRepository extends JpaRepository<Posts, Long> {
 주의할 점은 Entity 클래스와 기본 Entity Repository는 함께 위치해야 한다는 점이다.
 둘 은 아주 밀접한 관계이고, Entity 클래스는 기본 Repository 없이는 제대로 역할을 할 수가 없다.
 
-나중에 프로젝트가 커져 도메인별로 프로젝트를 분리해야 한다면 이떄 Entity 클래스와 기본 Repository는 함께 움직여야 하므로 도메인 패키지에서 관리한다.
+나중에 프로젝트가 커져 도메인별로 프로젝트를 분리해야 한다면 이때 Entity 클래스와 기본 Repository는 함께 움직여야 하므로 도메인 패키지에서 관리한다.
 
 ### 1.4 Spring Data JPA 테스트 코드 작성
 ```java
@@ -137,7 +137,7 @@ public class PostsRepositoryTest {
 }
 /*
 1. @After
-- Junit 단위테스트 끝날 떄마다 호출
+- Junit 단위테스트 끝날 때마다 호출
 - 배포 전 테스트 수행시 테스트간 테이터 침범 예방
 
 2. postsReporitory.save
@@ -174,7 +174,7 @@ Web(Contoller), Service, Repository, Dto, Domain 중에 비즈니스 로직을 �
 
 원래 서비스 메소드는 트랜젝션과 도메인 간의 순서만 보장해 준다. 여기서는 도메인 모델을 다룬다.
 
-Entity와 거의 유사한 형태인데도 Dto클래스를 추가로 생성했다. Entity클래스를 Request/Response 클래스로 사용하면 안 되는 이유는 Entity 클래스는 데이터베이스와 맞닿은 핵심클래스이기 떄문이다.
+Entity와 거의 유사한 형태인데도 Dto클래스를 추가로 생성했다. Entity클래스를 Request/Response 클래스로 사용하면 안 되는 이유는 Entity 클래스는 데이터베이스와 맞닿은 핵심클래스이기 때문이다.
 
 
 ```java

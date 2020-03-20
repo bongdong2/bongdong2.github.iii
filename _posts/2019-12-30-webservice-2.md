@@ -230,7 +230,7 @@ PostsService.java
     }
 ```
 
-@Transactional(readOnly = true) : 트랜잭션 범위는 유지하고 조회 기능만 남겨두어 조회 속도가 개선되기 떄문에 등록, 수정, 삭제 기능이 전혀 없는 메소드에 사용하는 것을 추천.
+@Transactional(readOnly = true) : 트랜잭션 범위는 유지하고 조회 기능만 남겨두어 조회 속도가 개선되기 때문에 등록, 수정, 삭제 기능이 전혀 없는 메소드에 사용하는 것을 추천.
 
 .map(PostsListResponseDto::new) : .map(posts -> new PostsListResponseDto(posts))
 
@@ -541,7 +541,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 - oauth2Login
     - OAuth2 로그인 기능에 대한 여러 설정의 진입점이다.
 - userInfoEndpoint
-    - OAuth2 로그인 성공 이후 사용자 정보를 가져올 떄의 설정들을 담당
+    - OAuth2 로그인 성공 이후 사용자 정보를 가져올 때의 설정들을 담당
 - userService
     - 소셜 로그인 성공 시 후속 조치를 진행할 UserService 인터페이스의 구현체를 등록.
     - 리소스 서버 (즉, 소셜 서비스들)에서 사용자 정보를 가져온 상태에서 추가로 진행하고자 하는 기능을 명시할 수 있다.
@@ -644,7 +644,7 @@ public class OAuthAttributes {
     - OAuth2User에서 반환하는 사용자 정보는 Map이기 때문에 값 하나하나를 변환해야 한다.
 - toEntity()
     - User 엔티티를 생성한다.
-    - OAuthAttribute에서 엔티티를 생성하는 시점은 처음 가입할 떄다.
+    - OAuthAttribute에서 엔티티를 생성하는 시점은 처음 가입할 때다.
     - 가입할 때 기본권한을 GUEST로 주기 위해 role 빌더값에는 Role.GUEST를 사용한다.
     - OAuthAttribute 클래스 생성이 끝났으면 같은 패키지에 SessionUser 클래스를 생성한다.
 
@@ -728,7 +728,7 @@ public class IndexController {
     - 앞서 작성된 CustomOAuthUserService에서 로그인 성공 시 세션에 SessionUser를 저장하도록 구성했다.
     - 즉, 로그인 성공 시 httpSession.getAttribute("user")에서 값을 가져올 수 있다.
 - if(user != null)
-    - 세션에 저장된 값이 있을 떄만 model에 userName으로 등록한다.
+    - 세션에 저장된 값이 있을 때만 model에 userName으로 등록한다.
     - 세션에 저장된 값이 없으면 model엔 아무런 값이 없는 생태이니 로그인 버튼이 보이게 된다.
 
 ### 2.5 애노테이션 기반으로 개선하기
@@ -821,7 +821,7 @@ IndexController에 @LoginUser 애노테이션 적용
 
 
 ### 2.6 세션 저장소롤 데이터베이스 사용하기
-이제까지 만든 서비스는 애플리케이션을 재시작하면 로그인이 풀린다. 이는 세션이 내장 톰캣에 저장되기 때문이다. 새션은 실행되는 WAS의 메모리에서 저장되고 호출된다. 메모리에 저장되다 보니 내장 톰캣처럼 애플리케이션 실행 시 실행되는 구조에선 항상 초기화가 된다. 즉 배포할 떄마다 톰캣이 재시작된다.<br>
+이제까지 만든 서비스는 애플리케이션을 재시작하면 로그인이 풀린다. 이는 세션이 내장 톰캣에 저장되기 때문이다. 새션은 실행되는 WAS의 메모리에서 저장되고 호출된다. 메모리에 저장되다 보니 내장 톰캣처럼 애플리케이션 실행 시 실행되는 구조에선 항상 초기화가 된다. 즉 배포할 때마다 톰캣이 재시작된다.<br>
 2대 이상의 서버에서 서비스하고 있다면 톰캣마다 세션 도익화 설정을 해야만 한다. 그래서 실제 현업에서는 세션 저장소에 대해 다음의 3가지 중 한 가지를 선택한다.
 
 1. 톰캣 세션을 사용한다.
@@ -842,8 +842,8 @@ IndexController에 @LoginUser 애노테이션 적용
 - application.properties
     - spring.session.store-type=jdbc
 - 애플리케이션을 실행 후 로그인하고 h2-console에 접속하면 세션을 위한 테이블 2개가 생성된 것을 볼 수 있다. JPA로 인해 세션 테이블이 자동 생성되었다.
-    - 기존과 동일하게 스프링을 재시작하면 세션이 풀린다. H2도 재시작되기 떄문.
-    - 이후 AWS로 배포하게 되면 AWS의 데이터베이스 서비스인 RDS(Relational Database Service)를 사용하게 되니 이떄부터는 세션이 풀리지 않는다.
+    - 기존과 동일하게 스프링을 재시작하면 세션이 풀린다. H2도 재시작되기 때문.
+    - 이후 AWS로 배포하게 되면 AWS의 데이터베이스 서비스인 RDS(Relational Database Service)를 사용하게 되니 이때부터는 세션이 풀리지 않는다.
 
 ### 2.7 네이버 로그인
 네이버 오픈 API 등록한다.<br>
