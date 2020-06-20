@@ -76,7 +76,8 @@ h1 {
   - border : padding, margin 가운데
   - padding : 안쪽 간격
   - margin : 바깥쪽 간격
-- ![boxmodel](/images/cssboxmodel.png)
+
+![boxmodel](/images/cssboxmodel.png)
 
 ```css
 .box {
@@ -87,16 +88,93 @@ h1 {
   padding-left: 50px;
   margin-top: 50px;
   margin-left: 50px;
-  margin: 20px;
-  margin: 20px 10px;
-  margin: 20px 10px 5px 2px;
+  margin: 20px; // all
+  margin: 20px 10px; // top/bottom, left/right
+  margin: 20px 10px 5px 2px; // top, right, bottom, left
 }
 .inside-box {
   background-color: blue;
   width: 50%;
   height: 50%;
+
+  // border
   border-width: 5px;
   border-color: red;
   border-style: dashed;
 }
 ```
+
+### Display
+
+- 참고 : vs code에서 class="box"인 div생성하기
+  - div.box\*3
+- Inline vs Block vs Inline Block
+  - inline
+    - 모든 property 설정값을 지운다.
+    - text
+    - box는 사라지고 컨텐츠의 크기만큼만 박스가 생성된다.
+  - block
+    - 요소 옆에 아무것도 없는 것. block 다음은 바로 밑에 위치해야 한다.
+    - 다시 말해서, element 크기와 상관없이 그 옆에 다른 element가 위치하는 것을 허용하지 않는 것.
+    - 박스의 폭, 높이는 존재하지만 옆에 아무것도 놓을 수 없다.
+  - inline-block
+    - 요소 옆에 위치시킴
+    - 박스의 폭, 높이가 존재하고 옆에 요소를 놓을 수 있다.
+    - 인라인과 같은 설정값을 원하면서 동시에 박스 형태를 유지하고 싶으면 사용한다.
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Display Example</title>
+    <style>
+      .box1 {
+        background-color: chartreuse;
+        width: 50px;
+        height: 50px;
+        border-style: solid;
+        border-color: black;
+        border-width: 2px;
+      }
+      .box2 {
+        background-color: royalblue;
+        width: 50px;
+        height: 50px;
+        border-style: solid;
+        border-color: black;
+        border-width: 2px;
+        display: inline;
+      }
+      .box3 {
+        background-color: orange;
+        width: 50px;
+        height: 50px;
+        border-style: solid;
+        border-color: black;
+        border-width: 2px;
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Block</h1>
+    <div class="box1">1</div>
+    <div class="box1">2</div>
+    <div class="box1">3</div>
+    <h1>inline</h2>
+    <span class="box2">1</span>
+    <span class="box2">2</span>
+    <span class="box2">3</span>
+    <h1>inline-block</h1>
+    <span class="box3">1</span>
+    <span class="box3">2</span>
+    <span class="box3">3</span>
+  </body>
+</html>
+
+```
+
+![display](/images/display.png)
+
+### Position
