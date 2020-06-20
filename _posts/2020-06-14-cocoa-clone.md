@@ -175,6 +175,7 @@ h1 {
 
 ```
 
+![boxmodel](/images/cssboxmodel.png)
 ![display](/images/display.png)
 
 ### Position
