@@ -1,5 +1,5 @@
 ---
-title: "HTML & CSS - 코코아 클론코딩"
+title: "HTML & CSS - Basics"
 date: 2020-06-14 14:32:00 -0400
 categories: html&css
 ---
@@ -180,15 +180,15 @@ h1 {
 ### Position
 
 - static
-    - 디폴트로 모든 박스는 position이 static이다. 그 element를 거기 놓으면 거기 있을 것이다~ 라는 뜻이다.
+  - 디폴트로 모든 박스는 position이 static이다. 그 element를 거기 놓으면 거기 있을 것이다~ 라는 뜻이다.
 - fixed
-    - fixed는 스크롤해도 고정되어서 사라지지 않는다. position을 fixed로 고정하고 4가지 설정값을 줄 수 있다. top, bottom, left, right
+  - fixed는 스크롤해도 고정되어서 사라지지 않는다. position을 fixed로 고정하고 4가지 설정값을 줄 수 있다. top, bottom, left, right
 - absolute
-    - fixed랑 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.
-    - position absolute가 설정되면 html상에서 해당 element와 관계가 있는 (relative-부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 부모의 postion 속성이 없으면 유저가 설장한 값대로 움직인다.
-    - 부모 element가 없으면 body에 맞춰서 position을 잡는다. 반대로 부모가 relative postion을 설정하면 그에 상대해서 absolute position을 잡는다.
+  - fixed랑 비슷하다. 어디에든 붙일 수 있지만 스크롤한다고 보이지는 않는다.
+  - position absolute가 설정되면 html상에서 해당 element와 관계가 있는 (relative-부모박스) element를 살펴보고 이에 상응해서 포지션이 결정된다. 부모의 postion 속성이 없으면 유저가 설장한 값대로 움직인다.
+  - 부모 element가 없으면 body에 맞춰서 position을 잡는다. 반대로 부모가 relative postion을 설정하면 그에 상대해서 absolute position을 잡는다.
 - 정리
-    - position에는 fixed, relative, absolute, static 4가지가 있다 static은 디폴트, fixed는 고정 어디든 오버랩해서 계속 해당 위치에 고정시키기 위한 것, absolute는 position relative에 상대적으로 포지션을 잡는 것 relative가 없을 경우, absolute는 문서의 본문 body에 맞춰서 position을 잡는다.
+  - position에는 fixed, relative, absolute, static 4가지가 있다 static은 디폴트, fixed는 고정 어디든 오버랩해서 계속 해당 위치에 고정시키기 위한 것, absolute는 position relative에 상대적으로 포지션을 잡는 것 relative가 없을 경우, absolute는 문서의 본문 body에 맞춰서 position을 잡는다.
 
 ```html
 <!DOCTYPE html>
@@ -198,7 +198,8 @@ h1 {
     <title>Document</title>
     <style>
       body,
-      html { /* 브라우저가 갖고 있는 디폴트 값을 상쇄시킴 */
+      html {
+        /* 브라우저가 갖고 있는 디폴트 값을 상쇄시킴 */
         height: 100%;
         margin: 0;
         padding: 0;
