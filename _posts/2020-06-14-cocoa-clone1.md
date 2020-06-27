@@ -4,7 +4,7 @@ date: 2020-06-14 14:32:00 -0400
 categories: html&css
 ---
 
-코코아 클론 코딩 - 1
+html & css 기본
 
 ## 사전작업
 
