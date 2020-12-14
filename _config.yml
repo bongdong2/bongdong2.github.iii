@@ -19,7 +19,7 @@ locale                   : "ko-KR"
 title                    : "개발블로그"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
-name                     : "좌승의"
+name                     : "bongdong2"
 description              : "개발공부"
 url                      : "https://bongdong2.github.io" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : ""  # the subpath of your site, e.g. "/blog"
@@ -289,6 +289,6 @@ defaults:
       layout: single
       author_profile: false
       read_time: false
-      comments: # true
+      comments: true
       share: true
       related: true
