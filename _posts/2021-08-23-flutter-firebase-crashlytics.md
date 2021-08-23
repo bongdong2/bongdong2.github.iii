@@ -1,4 +1,8 @@
-# 플러터앱 Firebase Crashlytics 사용하기
+---
+title: "플러터앱 Firebase Crashlytics 사용하기"
+date: 2021-08-23 16:23:00 -0400
+categories: flutter
+---
 
 ## Firebase Crashlytics ??
 
@@ -16,7 +20,7 @@
 
 앱을 비정상적으로 종료시키면 모니터링 화면이 등장한다.
 
-![스크린샷 2021-08-20 오전 11.11.56.png](%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%A2%E1%86%B8%20Firebase%20Crashlytics%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%207b3eb230263b4a73a7cb196dfb757ec0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-20_%E1%84%8B%E1%85%A9%E1%84%8C%E1%85%A5%E1%86%AB_11.11.56.png)
+![image](/images/Crashlytics/1.png)
 
 ## 플러터 의존성 추가 & 다운로드
 
@@ -67,7 +71,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 
 xcode Runner 선택
 
-![스크린샷 2021-08-23 오후 2.53.43.png](%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%A2%E1%86%B8%20Firebase%20Crashlytics%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%207b3eb230263b4a73a7cb196dfb757ec0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-23_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_2.53.43.png)
+![image](/images/Crashlytics/2.png)
 
 Build Phases탭
 
@@ -75,11 +79,11 @@ Build Phases탭
 
 New Run Script Phase
 
-![스크린샷 2021-08-23 오후 2.55.49.png](%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%A2%E1%86%B8%20Firebase%20Crashlytics%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%207b3eb230263b4a73a7cb196dfb757ec0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-23_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_2.55.49.png)
+![image](/images/Crashlytics/3.png)
 
 ${PODS_ROOT}/FirebaseCrashlytics/run  입력
 
-![스크린샷 2021-08-23 오후 2.57.51.png](%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%A2%E1%86%B8%20Firebase%20Crashlytics%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%207b3eb230263b4a73a7cb196dfb757ec0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-23_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_2.57.51.png)
+![image](/images/Crashlytics/4.png)
 
 ## 앱 다시 빌드
 
@@ -157,7 +161,7 @@ FirebaseCrashlytics
 .setCustomKey('Exception', 'LoginConfig.dart > getGoogleAccount()');
 ```
 
-![스크린샷 2021-08-23 오후 3.40.38.png](%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%A2%E1%86%B8%20Firebase%20Crashlytics%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%207b3eb230263b4a73a7cb196dfb757ec0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-23_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_3.40.38.png)
+![image](/images/Crashlytics/5.png)
 
 ## 커스텀 로그 메시지 추가
 
@@ -167,7 +171,7 @@ FirebaseCrashlytics
 FirebaseCrashlytics.instance.log("Hello Clashlytics!");
 ```
 
-![스크린샷 2021-08-23 오후 3.41.14.png](%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%A2%E1%86%B8%20Firebase%20Crashlytics%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%207b3eb230263b4a73a7cb196dfb757ec0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-23_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_3.41.14.png)
+![image](/images/Crashlytics/6.png)
 
 ## user identifiers 설정
 
@@ -177,4 +181,4 @@ FirebaseCrashlytics.instance.log("Hello Clashlytics!");
 FirebaseCrashlytics.instance.setUserIdentifier("200177");
 ```
 
-![스크린샷 2021-08-23 오후 3.44.22.png](%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%90%E1%85%A5%E1%84%8B%E1%85%A2%E1%86%B8%20Firebase%20Crashlytics%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%80%E1%85%B5%207b3eb230263b4a73a7cb196dfb757ec0/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA_2021-08-23_%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE_3.44.22.png)
+![image](/images/Crashlytics/7.png)
