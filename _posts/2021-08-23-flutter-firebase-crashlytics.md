@@ -6,13 +6,13 @@ categories: flutter
 
 ## Firebase Crashlytics ??
 
-앱이 비정상적으로 종료되었을 경우 문제를 추적할 수 있게 해주는 툴이다. 
+앱이 비정상적으로 종료되었을 경우 문제를 추적할 수 있게 해주는 툴이다.
 
 앱버전, 디바이스 OS 버전, 디바이스명, 비정상종료 일시 등을 보여 주며, 오류가 발생했을 때 키, 로그, 데이터를 Clashlytics로 전달할 수 있다.
 
 ## SDK 추가하기
 
-파이어베이스 콘솔에서 Android, iOS앱에 각각 Crashlytics SDK를 추가해줘야 한다. 
+파이어베이스 콘솔에서 Android, iOS앱에 각각 Crashlytics SDK를 추가해줘야 한다.
 
 콘솔에서 '출시 및 모니터링' 메뉴의 Crashlytics를 선택한다.
 
@@ -81,7 +81,7 @@ New Run Script Phase
 
 ![image](/images/Crashlytics/3.png)
 
-${PODS_ROOT}/FirebaseCrashlytics/run  입력
+${PODS_ROOT}/FirebaseCrashlytics/run 입력
 
 ![image](/images/Crashlytics/4.png)
 
@@ -130,7 +130,7 @@ Fatal crash(치명적 오류)
 
 ```dart
 await FirebaseCrashlytics.instance.recordError(
-  error, 
+  error,
   stackTrace,
   reason: 'a fatal error',
   // Pass in 'fatal' argument
@@ -142,7 +142,7 @@ Non-Fatal crash(심각하지 않음)
 
 ```dart
 await FirebaseCrashlytics.instance.recordError(
-  error, 
+  error,
   stackTrace,
   reason: 'a non-fatal error'
 );
@@ -150,7 +150,7 @@ await FirebaseCrashlytics.instance.recordError(
 
 ## 커스텀 키
 
-**setCustomKey** 메서드를 이용해서 키/값  리포트를 전송할 수 있다.
+**setCustomKey** 메서드를 이용해서 키/값 리포트를 전송할 수 있다.
 
 최대 64개까지 설정가능하다. 그 이상은 무시된다. 1024길이가 초과하는 키 또는 값은 잘린다.
 
@@ -178,7 +178,7 @@ FirebaseCrashlytics.instance.log("Hello Clashlytics!");
 고유한 유저 ID를 리포트에 추가할 수 있다. ID 숫자, 토큰, 해시값이어야 한다.
 
 ```dart
-FirebaseCrashlytics.instance.setUserIdentifier("200177");
+FirebaseCrashlytics.instance.setUserIdentifier("[unique-id]");
 ```
 
 ![image](/images/Crashlytics/7.png)
