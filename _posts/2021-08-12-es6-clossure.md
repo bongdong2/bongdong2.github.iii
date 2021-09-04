@@ -1,5 +1,5 @@
 ---
-title: "ES6"
+title: "ES6 - 1"
 date: 2021-08-12 11:10:00 -0400
 categories: javascript
 ---
